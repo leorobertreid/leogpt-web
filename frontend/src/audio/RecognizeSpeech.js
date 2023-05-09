@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useContext} from 'react'
 
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
 
 import { useSendTranscript } from "../api/useSendTranscript";
+
+import { ChatContext } from "../contexts/ChatContext";
 
 /*
 const appId = process.env.REACT_APP_SPEECHLY_KEY;
@@ -14,6 +16,8 @@ SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition);
 
 const RecognizeSpeech = (props) => {
   const {setIsRecording} = props;
+
+  const {chatHistory, setChatHistory} = useContext(ChatContext);
 
   const {
     transcript,
@@ -36,7 +40,7 @@ const RecognizeSpeech = (props) => {
     SpeechRecognition.stopListening();
     setIsRecording(false);
 
-    useSendTranscript(transcript);
+    useSendTranscript(transcript, setChatHistory);
     resetTranscript();
   }
 

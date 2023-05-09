@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import getData from "./api/getData"
 
 import { v4 as uuidv4 } from 'uuid';
 
+import { ChatContext } from "./contexts/ChatContext";
+
 const ChatHistory = () => {
 
-  const [chatHistory, setChatHistory] = useState([]);
+  const {chatHistory, setChatHistory} = useContext(ChatContext);
 
   useEffect(() => {
     getData()
       .then((res) => {
-        for (let i of res.data) {
-          setChatHistory([...chatHistory, i]);
-          console.log(chatHistory);
-        }
+        setChatHistory(res.data);
       })
       .catch((e) => {
         console.log(e)
@@ -26,7 +25,7 @@ const ChatHistory = () => {
       {
         chatHistory.map((chatElement) => (
         <div key={uuidv4()}>
-          <h1>{chatElement[0]}</h1><p>Role: {chatElement[1]}</p>
+          <h3>{chatElement[0]}</h3><p>Role: {chatElement[1]}</p>
         </div>
         ))
       }
