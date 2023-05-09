@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
@@ -7,6 +7,7 @@ import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-po
 import { useSendTranscript } from "../api/useSendTranscript";
 
 import { ChatContext } from "../contexts/ChatContext";
+import { UserContext } from "../contexts/UserContext";
 
 /*
 const appId = process.env.REACT_APP_SPEECHLY_KEY;
@@ -18,6 +19,8 @@ const RecognizeSpeech = (props) => {
   const {setIsRecording} = props;
 
   const {chatHistory, setChatHistory} = useContext(ChatContext);
+
+  const {userName, setUserName} = useContext(UserContext);
 
   const {
     transcript,
@@ -40,7 +43,7 @@ const RecognizeSpeech = (props) => {
     SpeechRecognition.stopListening();
     setIsRecording(false);
 
-    useSendTranscript(transcript, setChatHistory);
+    useSendTranscript(transcript, setChatHistory, userName);
     resetTranscript();
   }
 

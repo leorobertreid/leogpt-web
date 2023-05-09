@@ -5,13 +5,15 @@ import getData from "./api/getData"
 import { v4 as uuidv4 } from 'uuid';
 
 import { ChatContext } from "./contexts/ChatContext";
+import { UserContext } from "./contexts/UserContext";
 
 const ChatHistory = () => {
 
   const {chatHistory, setChatHistory} = useContext(ChatContext);
+  const {userName, setUserName} = useContext(UserContext);
 
   useEffect(() => {
-    getData()
+    getData(userName)
       .then((res) => {
         setChatHistory(res.data);
       })
@@ -23,11 +25,16 @@ const ChatHistory = () => {
   return (
     <>
       {
+        chatHistory !== null
+        ?
         chatHistory.map((chatElement) => (
         <div key={uuidv4()}>
-          <h3>{chatElement[0]}</h3><p>Role: {chatElement[1]}</p>
+          <p><b>{chatElement[0]}</b></p><p>Role: {chatElement[1]}</p>
         </div>
         ))
+        :
+        <div>
+        </div>
       }
     </>
   )
