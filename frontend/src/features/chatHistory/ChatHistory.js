@@ -11,8 +11,6 @@ function ChatHistory() {
 
   const { isLoading, isFetching, data, error } = useGetMessageByUserNameQuery(name);
 
-  const chatData = useSelector((state) => state.chat.chatContent);
-
   if (error) {
     console.log(error);
   }
@@ -24,7 +22,7 @@ function ChatHistory() {
         ) : isLoading || isFetching ? (
         <p>Loading...</p>
       ) : data ? (
-        data.map((item) => (
+         data.map((item) => (
           <div key={uuid()}>
             <p>{item[0]}</p>
             <p>{item[1]}</p>
