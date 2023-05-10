@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useRouter } from 'next/navigation';
 
 import ChatHistory from "@/features/chatHistory/ChatHistory";
+import PostMessage from "@/features/postMessage/PostMessage";
 
 export default function Home() {
   const name = useSelector((state) => state.user.name);

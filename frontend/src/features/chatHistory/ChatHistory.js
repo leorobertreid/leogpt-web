@@ -1,22 +1,20 @@
 import React from 'react'
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
 import { useGetMessageByUserNameQuery } from "@/redux/services/messagesApi"
+
+import uuid from 'react-uuid';
 
 function ChatHistory() {
   const name = useSelector((state) => state.user.name);
 
   const { isLoading, isFetching, data, error } = useGetMessageByUserNameQuery(name);
 
+  const chatData = useSelector((state) => state.chat.chatContent);
+
   if (error) {
     console.log(error);
-  }
-
-  if (data) {
-    for (let item of data) {
-      console.log(item)
-    }
   }
 
   return (
@@ -27,7 +25,7 @@ function ChatHistory() {
         <p>Loading...</p>
       ) : data ? (
         data.map((item) => (
-          <div>
+          <div key={uuid()}>
             <p>{item[0]}</p>
             <p>{item[1]}</p>
           </div>

@@ -11,7 +11,7 @@ export const messagesApi = createApi({
       query: (name) => `getAllMessages/${name}`,
     }),
     createMessage: builder.mutation({
-      query: (name, text) => ({
+      query: ({name, text}) => ({
         url: "create-text",
         method: "POST",
         body: {user: name, message: text},
@@ -20,4 +20,4 @@ export const messagesApi = createApi({
   }),
 });
 
-export const { useGetMessageByUserNameQuery } = messagesApi;
+export const { useGetMessageByUserNameQuery, useCreateMessageMutation } = messagesApi;
