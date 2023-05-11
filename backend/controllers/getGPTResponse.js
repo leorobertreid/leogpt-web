@@ -31,6 +31,8 @@ const getGPTResponse = async (username) => {
     throw new Error("Get all messages returned null")
   }
 
+  console.log("messages: ")
+
   const SystemMessage = await getSystemMessage("main-message")
 
   if (SystemMessage === null) {

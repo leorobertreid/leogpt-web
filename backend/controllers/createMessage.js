@@ -8,11 +8,11 @@ const createMessage = async (message, username, messageType) => {
 
   if (!userExists) {
     const user = new User({name: username, messages: [[message, messageType]]})
-    user.save()
+    await user.save()
   } else {
     const user = await User.findOne().where("name").equals(username)
     user.messages.push([message, messageType])
-    user.save()
+    await user.save()
   }
 }
 
