@@ -1,6 +1,7 @@
 import './globals.css'
 
 import { Providers } from "@/redux/provider";
+import Header from "@/ui/Header";
 
 export const metadata = {
   title: 'Leo GPT',
@@ -12,9 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Providers>
-          <header>
-            <h2>Leo GPT</h2>
-          </header>
+        <Header></Header>
         {children}
         </Providers>
       </body>

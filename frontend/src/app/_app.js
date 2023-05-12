@@ -1,11 +1,5 @@
 import 'regenerator-runtime/runtime'
 
-function MyApp({ Component, pageProps }) {
-  return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
-  );
+export default function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />;
 }
-
-export default MyApp;
