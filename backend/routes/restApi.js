@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const handleConversation = require("../controllers/handleConversation")
-const getAllMessages = require("../controllers/getAllMessages")
+const handleConversation = require("../controllers/message/handleConversation")
+const getAllMessages = require("../controllers/message/getAllMessages")
 
-const createSystemMessage = require("../controllers/createSystemMessage")
-const getSystemMessage = require("../controllers/getSystemMessage")
+const createSystemMessage = require("../controllers/message/createSystemMessage")
+const getSystemMessage = require("../controllers/message/getSystemMessage")
 
-router.route("/create-text")
+router.route("/messages")
   .post(async (req, res) => {
     const reqContents = req.body;
     if (reqContents.user && reqContents.message) {
@@ -19,7 +19,7 @@ router.route("/create-text")
     }
   })
 
-router.get("/getAllMessages/:username", async (req, res) => {
+router.get("/messages/:username", async (req, res) => {
   const messages = await getAllMessages(req.params.username.toLowerCase())
   res.json(messages)
 })

@@ -1,4 +1,4 @@
-const SystemMessage = require("../models/SystemMessage")
+const SystemMessage = require("../../models/SystemMessage")
 
 const createSystemMessage = async (name, data) => {
   const userExists = await SystemMessage.exists().where("name").equals(name)

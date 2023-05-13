@@ -2,6 +2,11 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 
+const restApi = require("./routes/restApi");
+const auth = require("./routes/auth")
+
+const checkToken = require("./controllers/auth/checkToken")
+
 require('dotenv').config()
 
 try {
@@ -10,15 +15,16 @@ try {
   console.log(err);
 }
 
-
-const restApi = require("./routes/restApi");
-
 const app = express()
 
 app.use(cors())
-
 app.use(express.json())
 
+app.use(checkToken);
+
+
 app.use("/rest", restApi);
+
+app.use("/auth", auth)
 
 app.listen(5000)
