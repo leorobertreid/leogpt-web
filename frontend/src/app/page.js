@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 import ChatHistory from "./features/chatHistory/ChatHistory";
 import PostMessage from "./features/postMessage/PostMessage";
-// import SpeechRecognitionComponent from "@/features/speechRecognition/SpeechRecognitionComponent";
+// import SpeechRecognitionComponent from "@/app/features/speechRecognition/SpeechRecognitionComponent";
 
 export default function Home() {
   const name = useSelector((state) => state.user.name);

@@ -16,6 +16,7 @@ function PostMessage() {
   }
 
   return (
+    <>
     <form onSubmit={handleSubmit} className="fixed bottom-0 bg-white w-full p-2 flex justify-between items-center">
       <input 
         type="text" 
@@ -31,6 +32,7 @@ function PostMessage() {
         submit
       </button>
     </form>
+    </>
   )
 }
 
