@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 
 import { useRouter } from 'next/navigation';
 
-import ChatHistory from "@/features/chatHistory/ChatHistory";
-import PostMessage from "@/features/postMessage/PostMessage";
+import ChatHistory from "./features/chatHistory/ChatHistory";
+import PostMessage from "./features/postMessage/PostMessage";
 // import SpeechRecognitionComponent from "@/features/speechRecognition/SpeechRecognitionComponent";
 
 export default function Home() {
@@ -26,8 +26,9 @@ export default function Home() {
   return (
     <>
       <div>
-        Chat history: 
         <ChatHistory></ChatHistory>
+        {/* spacing to allow for enough spacing for the post message to not hide the last message */}
+        <div className="h-5"></div>
         <PostMessage></PostMessage>
         {/*<SpeechRecognitionComponent></SpeechRecognitionComponent>*/}
       </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef, useEffect} from 'react'
 
 import { useSelector, useDispatch } from "react-redux"
 
@@ -15,21 +15,37 @@ function ChatHistory() {
     console.log(error);
   }
 
+  const messagesEndRef = useRef(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [data]);
+
   return (
-    <>
+    <div className="py-10 w-1/2 m-auto">
       {error ? (
         <p>No chat history found for user {name}. Once you start adding messages, they will appear here</p>
         ) : isLoading || isFetching ? (
         <p>Loading...</p>
       ) : data ? (
          data.map((item) => (
-          <div key={uuid()}>
+          item[1] == "user"
+          ?
+          <div key={uuid()} className="bg-white shadow-lg text-black p-2 rounded-md m-3">
             <p>{item[0]}</p>
-            <p>{item[1]}</p>
+          </div>
+          :
+          <div key={uuid()} className="bg-zinc-800 shadow-lg text-white p-2 rounded-md m-3">
+            <p>{item[0]}</p>
           </div>
         ))
       ): null}
-    </>
+      <div ref={messagesEndRef}></div>
+    </div>
   )
 }
 

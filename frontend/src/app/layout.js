@@ -1,7 +1,9 @@
+import 'regenerator-runtime/runtime'
+
 import './globals.css'
 
 import { Providers } from "@/redux/provider";
-import Header from "@/ui/Header";
+import Header from "./ui/header/Header";
 
 export const metadata = {
   title: 'Leo GPT',
@@ -11,7 +13,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <head>
+        <link rel="shortcut icon" href="/public/logo-no-bg.png" />
+      </head>
+      <body suppressHydrationWarning={true}>
         <Providers>
         <Header></Header>
         {children}
