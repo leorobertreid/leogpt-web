@@ -69,7 +69,7 @@ export default function Login() {
           <br></br>
           <InputField name="Password" input={input} setInput={setInput} isRequired={isPasswordRequired}></InputField>
           <br></br>
-          <button type="submit" className="px-6 py-2 mt-4 text-white shadow-lg bg-zinc-800 rounded-lg hover:bg-white hover:text-zinc-800">submit</button>
+          <button type="submit" className="transition hover:duration-300 px-6 py-2 mt-4 text-white shadow-lg bg-zinc-800 rounded-lg hover:bg-white hover:text-zinc-800">submit</button>
           </div>
           {
             invalidSignIn

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image';
 
 import Hamburger from "./Hamburger"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -16,7 +16,6 @@ const Header = () => {
     :
     setShowMenu(true)
   }
-
 
   return (
     <>
@@ -45,13 +44,13 @@ const Header = () => {
           <div>
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               <Link href="/" passHref>
-                <div className="hover:bg-zinc-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Home</div>
+                <div className="transition hover:duration-300 hover:bg-zinc-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Home</div>
               </Link>
               <Link href="/about" passHref>
-                <div className="hover:bg-zinc-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">About</div>
+                <div className="transition hover:duration-300 hover:bg-zinc-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">About</div>
               </Link>
               <Link href="/contact" passHref>
-                <div className="hover:bg-zinc-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Contact</div>
+                <div className="transition hover:duration-300 hover:bg-zinc-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Contact</div>
               </Link>
             </div>
           </div>

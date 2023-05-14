@@ -30,7 +30,7 @@ function PostMessage() {
       />
       <button 
         type="submit" 
-        className="bg-zinc-800 hover:bg-white hover:text-zinc-800 shadow-lg text-white font-bold py-2 px-3 rounded-lg ml-4 text-sm"
+        className="transition hover:duration-300 bg-zinc-800 hover:bg-white hover:text-zinc-800 shadow-lg text-white font-bold py-2 px-3 rounded-lg ml-4 text-sm"
       >
         submit
       </button>

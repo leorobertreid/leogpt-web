@@ -77,7 +77,7 @@ export default function Login() {
           {
             invalidSignIn
             &&
-            <span className="text-xs tracking-wide text-red-600">User already exists with that name</span>
+            <span className="transition hover:duration-300 text-xs tracking-wide text-red-600">User already exists with that name</span>
           }
         </form>
       </div>
