@@ -10,8 +10,8 @@ const getSystemMessage = require("../controllers/message/getSystemMessage")
 router.route("/messages")
   .post(async (req, res) => {
     const reqContents = req.body;
-    if (reqContents.user && reqContents.message) {
-      await handleConversation(reqContents.message, reqContents.user.toLowerCase())
+    if (req.username && reqContents.message) {
+      await handleConversation(reqContents.message, req.username.toLowerCase())
       
       res.send("Success with connection")
     } else {

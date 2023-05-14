@@ -31,8 +31,6 @@ const getGPTResponse = async (username) => {
     throw new Error("Get all messages returned null")
   }
 
-  console.log("messages: ")
-
   const SystemMessage = await getSystemMessage("main-message")
 
   if (SystemMessage === null) {
@@ -47,11 +45,6 @@ const getGPTResponse = async (username) => {
 
   for (let i of messages) {
     formattedMessages.push({role: i[1], content: i[0]})
-  }
-
-  console.log("formatted messages: ")
-  for (let i of formattedMessages) {
-    console.log(i);
   }
 
   try {

@@ -4,14 +4,17 @@ import { useCreateMessageMutation } from "@/redux/services/messagesApi"
 
 function PostMessage() {
   const [text, setText] = useState("");
-  const name = useSelector((state) => state.user.name);
+
+  const username = useSelector((state) => state.user.username);
+  const authToken = useSelector((state) => state.user.authToken);
+
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [createMessage] = useCreateMessageMutation();
 
   function handleSubmit(event) {
     event.preventDefault();
     setFormSubmitted(true);
-    createMessage({name, text});
+    createMessage({username, text, token: authToken});
     setText("");
   }
 

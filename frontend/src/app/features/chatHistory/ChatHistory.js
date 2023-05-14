@@ -7,9 +7,11 @@ import { useGetMessageByUserNameQuery } from "@/redux/services/messagesApi"
 import uuid from 'react-uuid';
 
 function ChatHistory() {
-  const name = useSelector((state) => state.user.name);
+  const username = useSelector((state) => state.user.username);
 
-  const { isLoading, isFetching, data, error } = useGetMessageByUserNameQuery(name);
+  const authToken = useSelector((state) => state.user.authToken);
+
+  const { isLoading, isFetching, data, error } = useGetMessageByUserNameQuery({username, token: authToken});
 
   if (error) {
     console.log(error);

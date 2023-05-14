@@ -17,10 +17,12 @@ export default function RootLayout({ children }) {
         <link rel="shortcut icon" href="/public/logo-no-bg.png" />
       </head>
       <body suppressHydrationWarning={true}>
-        <Providers>
-        <Header></Header>
-        {children}
-        </Providers>
+        <div className="flex flex-col h-screen">
+          <Providers>
+          <Header></Header>
+          {children}
+          </Providers>
+        </div>
       </body>
     </html>
   )

@@ -1,9 +1,9 @@
 const SystemMessage = require("../../models/SystemMessage")
 
 const createSystemMessage = async (name, data) => {
-  const userExists = await SystemMessage.exists().where("name").equals(name)
+  const messageExists = await SystemMessage.exists().where("name").equals(name)
 
-  if (!userExists) {
+  if (!messageExists) {
     const message = new SystemMessage({name: name, message: data})
     message.save()
   } else {

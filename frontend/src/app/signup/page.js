@@ -8,23 +8,24 @@ import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import InputField from "../features/form/InputField";
 
-import { useLogInMutation } from "@/redux/services/authApi";
 import { calculateSizeAdjustValues } from "next/dist/server/font-utils";
+import { useSignUpMutation } from "@/redux/services/authApi";
 
 export default function Login() {
   const authToken = useSelector((state) => state.user.authToken)
 
   const [invalidSignIn, setInvalidSignIn] = useState(false);
 
-  const [logIn] = useLogInMutation();
+  const [signUp] = useSignUpMutation();
   
   const dispatch = useDispatch()
 
-  const [input, setInput] = useState({Username: "", Password: ""});
+  const [input, setInput] = useState({Username: "", Email: "", Password: ""});
 
   const { push } = useRouter();
 
   const [isUserNameRequired, setIsUserNameRequired] = useState(false);
+  const [isEmailRequired, setIsEmailRequired] = useState(false);
   const [isPasswordRequired, setIsPasswordRequired] = useState(false);
 
   async function handleSubmit(event) {
@@ -40,13 +41,13 @@ export default function Login() {
     }
 
     try {
-      const {data} = await logIn({username: input.Username, password: input.Password});
+      const response = await signUp({username: input.Username, email: input.Email, password: input.Password});
 
-      if (data === null) {
-        throw new Error("Username or Password is invalid")
+      if (response.data === null) {
+        throw new Error("User already exists with that name")
       }
 
-      const token = data.token;
+      const token = response.data.token;
   
       dispatch(setToken({authToken: token}));
   
@@ -54,7 +55,7 @@ export default function Login() {
   
       push('/');
     } catch(e) {
-      console.log("Username or Password is invalid");
+      console.log("User already exists with that name");
       setInvalidSignIn(true);
     }
   }
@@ -67,6 +68,8 @@ export default function Login() {
           <div className="mt-4">
           <InputField name="Username" input={input} setInput={setInput} isRequired={isUserNameRequired}></InputField>
           <br></br>
+          <InputField name="Email" input={input} setInput={setInput} isRequired={isEmailRequired}></InputField>
+          <br></br>
           <InputField name="Password" input={input} setInput={setInput} isRequired={isPasswordRequired}></InputField>
           <br></br>
           <button type="submit" className="px-6 py-2 mt-4 text-white shadow-lg bg-zinc-800 rounded-lg hover:bg-white hover:text-zinc-800">submit</button>
@@ -74,7 +77,7 @@ export default function Login() {
           {
             invalidSignIn
             &&
-            <span className="text-xs tracking-wide text-red-600">Invalid username or password</span>
+            <span className="text-xs tracking-wide text-red-600">User already exists with that name</span>
           }
         </form>
       </div>

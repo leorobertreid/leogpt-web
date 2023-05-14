@@ -14,8 +14,8 @@ router.post(
 
       if (!userExists) {
         if (req.body.username && req.body.email && req.body.password) {
-          const user = await handleSignUp(req.body.username, req.body.email, req.body.password);
-          res.json(user);
+          const token = await handleSignUp(req.body.username, req.body.email, req.body.password);
+          res.json({token});
         } else {
           res.status(400).send("you must give a username, email and password field");
         }
@@ -32,13 +32,13 @@ router.post(
 router.post(
   "/login",
   async (req, res) => {
-    // try {
+    try {
       const userExists = await User.exists({"username": req.body.username})
       if (userExists) {
         if (req.body.username && req.body.password) {
           const result = await handleSignIn(req.body.username, req.body.password);
           if (result.accepted) {
-            res.json(result.token);
+            res.json({token: result.token});
           } else {
             res.status(400).send("incorrect password");
           }
@@ -48,9 +48,9 @@ router.post(
       } else {
         res.status(400).send("the user doesn't exist");
       }
-    // } catch(error) {
-    //   res.status(400).json({error})
-    // }
+    } catch(error) {
+      res.status(400).json({error})
+    }
   }
 )
 

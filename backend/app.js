@@ -20,10 +20,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.use(checkToken);
-
-
-app.use("/rest", restApi);
+app.use("/rest", checkToken, restApi);
 
 app.use("/auth", auth)
 
