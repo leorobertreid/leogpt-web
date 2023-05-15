@@ -2,16 +2,16 @@ import React, {useRef, useEffect} from 'react'
 
 import { useSelector, useDispatch } from "react-redux"
 
-import { useGetMessageByUserNameQuery } from "@/redux/services/messagesApi"
+import { useGetMessagesQuery } from "@/redux/services/messagesApi"
 
 import uuid from 'react-uuid';
 
 function ChatHistory() {
   const username = useSelector((state) => state.user.username);
-
   const authToken = useSelector((state) => state.user.authToken);
+  const conversation = useSelector((state) => state.conversation.conversation);
 
-  const { isLoading, isFetching, data, error } = useGetMessageByUserNameQuery({username, token: authToken});
+  const { isLoading, isFetching, data, error } = useGetMessagesQuery({username, conversation, token: authToken});
 
   if (error) {
     console.log(error);
@@ -30,7 +30,7 @@ function ChatHistory() {
   return (
     <div className="py-10 w-1/2 m-auto">
       {error ? (
-        <p>No chat history found for user {name}. Once you start adding messages, they will appear here</p>
+        <p>No messages found in this conversation. Once you start adding messages, they will appear here</p>
         ) : isLoading || isFetching ? (
         <p>Loading...</p>
       ) : data ? (

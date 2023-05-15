@@ -8,18 +8,18 @@ export const messagesApi = createApi({
   }),
   tagTypes: ['Messages'],
   endpoints: (builder) => ({
-    getMessageByUserName: builder.query({
-      query: ({username, token}) => ({
-          url: `messages/${username}`,
+    getMessages: builder.query({
+      query: ({username, conversation, token}) => ({
+          url: `messages/${username}/${conversation}`,
           headers: {"authentication-token": token}
         }),
         providesTags: ['Messages'],
     }),
     createMessage: builder.mutation({
-      query: ({username, text, token}) => ({
-        url: "messages",
+      query: ({username, text, conversation, token}) => ({
+        url: "message",
         method: "POST",
-        body: {username: username, message: text},
+        body: {username: username, message: text, conversation},
         headers: {"authentication-token": token}
       }),
       invalidatesTags: ['Messages'],
@@ -27,4 +27,4 @@ export const messagesApi = createApi({
   }),
 });
 
-export const { useGetMessageByUserNameQuery, useCreateMessageMutation } = messagesApi;
+export const { useGetMessagesQuery, useCreateMessageMutation } = messagesApi;

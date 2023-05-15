@@ -12,14 +12,15 @@ import PostMessage from "./features/postMessage/PostMessage";
 
 export default function Home() {
   const username = useSelector((state) => state.user.username);
+  const conversation = useSelector((state) => state.conversation.conversation);
 
   const { push } = useRouter();
 
   useEffect(() => {
-    console.log(name)
-
     if (username === "" || !username) {
       push('/login');
+    } else if (conversation === "" || !conversation) {
+      push('/conversations');
     }
   }, [])
 

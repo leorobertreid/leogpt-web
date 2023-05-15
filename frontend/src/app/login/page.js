@@ -10,6 +10,7 @@ import InputField from "../features/form/InputField";
 
 import { useLogInMutation } from "@/redux/services/authApi";
 import { calculateSizeAdjustValues } from "next/dist/server/font-utils";
+import Link from "next/link";
 
 export default function Login() {
   const authToken = useSelector((state) => state.user.authToken)
@@ -70,6 +71,8 @@ export default function Login() {
           <InputField name="Password" input={input} setInput={setInput} isRequired={isPasswordRequired}></InputField>
           <br></br>
           <button type="submit" className="transition hover:duration-300 px-6 py-2 mt-4 text-white shadow-lg bg-zinc-800 rounded-lg hover:bg-white hover:text-zinc-800">submit</button>
+          <br></br>
+          <Link href="/signup" className="underline">Don't have an account? Sign up!</Link>
           </div>
           {
             invalidSignIn

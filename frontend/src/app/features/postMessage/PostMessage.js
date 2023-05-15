@@ -7,6 +7,7 @@ function PostMessage() {
 
   const username = useSelector((state) => state.user.username);
   const authToken = useSelector((state) => state.user.authToken);
+  const conversation = useSelector((state) => state.conversation.conversation);
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [createMessage] = useCreateMessageMutation();
@@ -14,7 +15,7 @@ function PostMessage() {
   function handleSubmit(event) {
     event.preventDefault();
     setFormSubmitted(true);
-    createMessage({username, text, token: authToken});
+    createMessage({username, text, conversation, token: authToken});
     setText("");
   }
 
