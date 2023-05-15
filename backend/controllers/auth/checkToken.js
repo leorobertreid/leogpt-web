@@ -11,6 +11,7 @@ module.exports = function checkToken (request, response, next) {
   // verify the user
   try {
     const verifiedUser = jwt.verify(token, process.env.SECRET);
+
     request.user = verifiedUser;
     request.username = verifiedUser.username;
     next();

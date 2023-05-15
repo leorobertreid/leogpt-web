@@ -11,12 +11,12 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
-  messages: {
-    type: [[String, String]],
-    required: false,
-  } 
+  conversations: {
+    type: [{type: mongoose.Schema.Types.ObjectId, ref: "Conversation"}],
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema)

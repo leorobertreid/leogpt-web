@@ -1,14 +1,9 @@
-const mongoose = require("mongoose")
-const User = require("../../models/User")
+const getConversation = require("../conversation/getConversation")
 
-const getAllMessages = async (username) => {
-  const messages = await User.findOne().where("username").equals(username).select("messages")
-  if (messages !== null) {
-    return messages.messages
-  }
-  else {
-    return null
-  }
+const getAllMessages = async (username, conversationName) => {
+  const conversation = await getConversation(username, conversationName)
+
+  return conversation.messages
 }
 
 module.exports = getAllMessages

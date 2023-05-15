@@ -2,11 +2,11 @@ require("dotenv").config()
 
 const { Configuration, OpenAIApi } = require ("openai");
 
-const getAllMessages = require("./getAllMessages")
+const getAllMessages = require("../../message/getAllMessages")
 
-const getSystemMessage = require("./getSystemMessage")
+const getSystemMessage = require("../../systemMessage/getSystemMessage")
 
-const getGPTResponse = async (username) => {
+const getGPTResponse = async (username, conversationName) => {
   const apiKey = process.env.OPENAI_API_KEY
   const org = process.env.OPENAI_ORG
 
@@ -20,7 +20,7 @@ const getGPTResponse = async (username) => {
   let messages = null
 
   for (let i = 0; i < 5; i++) {
-    messages = await getAllMessages(username);
+    messages = await getAllMessages(username, conversationName);
 
     if (messages !== null) {
       break

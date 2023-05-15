@@ -1,18 +1,11 @@
-const mongoose = require("mongoose");
+const getConversation = require("../conversation/getConversation")
 
-const User = require("../../models/User")
-
-const createMessage = async (message, username, messageType) => {
-
-  const userExists = await User.exists().where("username").equals(username)
-
-  if (!userExists) {
-    return -1
-  } else {
-    const user = await User.findOne().where("username").equals(username)
-    user.messages.push([message, messageType])
-    await user.save()
-  }
+const createMessage = async (message, username, conversationName, messageType) => {
+  const conversation = await getConversation(username, conversationName);
+  
+  conversation.messages.push([message, messageType])
+  await conversation.save()
+  
 }
 
 module.exports = createMessage

@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken")
 async function handleSignUp(username, email, password) {
   const passwordHashed = await bcrypt.hash(password, 10);
 
-  const user = new User({username: username, email: email, password: passwordHashed, messages: []});
+  const user = new User({username: username, email: email, password: passwordHashed, conversations: []});
   await user.save();
 
   const token = await jwt.sign({ username: user.username }, process.env.SECRET);
