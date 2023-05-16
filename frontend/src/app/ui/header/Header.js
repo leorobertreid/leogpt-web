@@ -46,11 +46,11 @@ const Header = () => {
               <Link href="/" passHref>
                 <div className="transition hover:duration-300 hover:bg-zinc-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Home</div>
               </Link>
-              <Link href="/about" passHref>
-                <div className="transition hover:duration-300 hover:bg-zinc-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">About</div>
+              <Link href="/login" passHref>
+                <div className="transition hover:duration-300 hover:bg-zinc-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Login</div>
               </Link>
-              <Link href="/contact" passHref>
-                <div className="transition hover:duration-300 hover:bg-zinc-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Contact</div>
+              <Link href="/conversations" passHref>
+                <div className="transition hover:duration-300 hover:bg-zinc-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Conversations</div>
               </Link>
             </div>
           </div>
