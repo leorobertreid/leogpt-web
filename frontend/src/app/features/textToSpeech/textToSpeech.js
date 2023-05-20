@@ -6,7 +6,7 @@ const textToSpeech = async (inputText) => {
   // Do not use directly. Use environment variables.
 
   // Set the ID of the voice to be used.
-  const VOICE_ID = '21m00Tcm4TlvDq8ikWAM';
+  const VOICE_ID = 'uW2ZDAvxsRxaJF2DaRKH';
 
   // Set options for the API request.
   const options = {

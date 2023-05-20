@@ -4,9 +4,11 @@ import { useSelector, useDispatch } from "react-redux"
 
 import { useGetMessagesQuery } from "@/redux/services/messagesApi"
 
-import useAudioPlayer from "../textToSpeech/useAudioPlayer";
+import audioPlayer from "../textToSpeech/audioPlayer";
+import useAudio from "../textToSpeech/useAudio";
 
 import uuid from 'react-uuid';
+import { async } from "regenerator-runtime";
 
 function ChatHistory() {
   const username = useSelector((state) => state.user.username);
@@ -30,22 +32,29 @@ function ChatHistory() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
 
-  useEffect(() => {
-    scrollToBottom()
-
+  const handleAudio = async () => {
     if (justLoaded) {
       setJustLoaded(false);
     } else {
       if (data) {
         if (data[data.length - 1][1] === "assistant") {
-          useAudioPlayer(data[data.length - 1][0])
+          await audioPlayer(data[data.length - 1][0], setAudioURL);
         }
       }
     }
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+
+    console.log(justLoaded)
+    handleAudio();
+
   }, [data]);
 
   return (
     <>
+    <div>
       <div className="py-10 w-1/2 m-auto">
         {error ? (
           <p>No messages found in this conversation. Once you start adding messages, they will appear here</p>
@@ -65,7 +74,10 @@ function ChatHistory() {
           ))
         ): null}
         <div ref={messagesEndRef}></div>
+        <audio src={audioURL} controls className="w-full"></audio>
       </div>
+    </div>
+
     </>
   )
 }
