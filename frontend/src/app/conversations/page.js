@@ -10,7 +10,7 @@ import { setConversation } from "@/redux/features/conversation/conversationSlice
 
 import uuid from "react-uuid"
 
-function page() {
+function Conversation() {
   const username = useSelector((state) => state.user.username);
   const authToken = useSelector((state) => state.user.authToken);
 
@@ -86,4 +86,4 @@ function page() {
   )
 }
 
-export default page
+export default Conversation

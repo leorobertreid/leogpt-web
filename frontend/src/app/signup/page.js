@@ -13,7 +13,7 @@ import { useSignUpMutation } from "@/redux/services/authApi";
 
 import Link from "next/link";
 
-export default function Login() {
+export default function SignUp() {
   const authToken = useSelector((state) => state.user.authToken)
 
   const [invalidSignIn, setInvalidSignIn] = useState(false);
