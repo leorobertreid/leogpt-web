@@ -20,6 +20,12 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+app.use((req, res, next) => {
+  console.log("gotten request");
+  console.log(req.body);
+  next();
+})
+
 app.use("/rest", checkToken, restApi);
 
 app.use("/auth", auth)
