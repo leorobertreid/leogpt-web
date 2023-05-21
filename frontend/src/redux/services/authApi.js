@@ -4,7 +4,7 @@ export const authApi = createApi({
   reducerPath: "authApi",
   refetchOnFocus: true,
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/auth/",
+    baseUrl: process.env.BACKEND_URL + "auth/",
   }),
   tagTypes: ['Auth'],
   endpoints: (builder) => ({

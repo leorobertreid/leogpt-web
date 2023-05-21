@@ -37,9 +37,11 @@ function ChatHistory() {
       setJustLoaded(false);
     } else {
       if (data) {
-        if (data[data.length - 1][1] === "assistant") {
-          await audioPlayer(data[data.length - 1][0], setAudioURL);
-        }
+        try {
+          if (data[data.length - 1][1] === "assistant") {
+            await audioPlayer(data[data.length - 1][0], setAudioURL);
+          }
+        } catch {}
       }
     }
   }

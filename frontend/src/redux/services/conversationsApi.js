@@ -4,7 +4,7 @@ export const conversationsApi = createApi({
   reducerPath: "conversationsApi",
   refetchOnFocus: true,
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/rest/",
+    baseUrl: process.env.BACKEND_URL + "rest/",
   }),
   tagTypes: ['Conversations'],
   endpoints: (builder) => ({
