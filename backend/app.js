@@ -30,4 +30,4 @@ app.use("/rest", checkToken, restApi);
 
 app.use("/auth", auth)
 
-app.listen(5000)
+app.listen(process.env.PORT)
