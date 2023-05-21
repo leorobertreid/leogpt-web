@@ -5,7 +5,9 @@ const cors = require('cors')
 const restApi = require("./routes/restApi");
 const auth = require("./routes/auth")
 
-const checkToken = require("./controllers/auth/checkToken")
+const checkToken = require("./controllers/auth/checkToken");
+
+const bodyParser = require('body-parser');
 
 require('dotenv').config()
 
@@ -16,6 +18,9 @@ try {
 }
 
 const app = express()
+
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 
 app.use(cors());
 app.use(express.json());

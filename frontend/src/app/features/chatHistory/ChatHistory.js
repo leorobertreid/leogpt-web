@@ -5,20 +5,25 @@ import { useSelector, useDispatch } from "react-redux"
 import { useGetMessagesQuery } from "@/redux/services/messagesApi"
 
 import audioPlayer from "../textToSpeech/audioPlayer";
-import useAudio from "../textToSpeech/useAudio";
 
 import uuid from 'react-uuid';
 import { async } from "regenerator-runtime";
+
+import { useGetVideoFromAudioMutation } from "@/redux/services/audioToVideoApi";
 
 function ChatHistory() {
   const username = useSelector((state) => state.user.username);
   const authToken = useSelector((state) => state.user.authToken);
   const conversation = useSelector((state) => state.conversation.conversation);
 
+  const [getVideoFromAudio] = useGetVideoFromAudioMutation();
+
   // we use this to not do text to speech when you just loaded the page
   const [justLoaded, setJustLoaded] = useState(true);
 
   const [audioURL, setAudioURL] = useState(null);
+  const [audioData, setAudioData] = useState(null);
+  const [videoURL, setVideoURL] = useState();
 
   const { isLoading, isFetching, data, error } = useGetMessagesQuery({username, conversation, token: authToken});
 
@@ -39,7 +44,11 @@ function ChatHistory() {
       if (data) {
         try {
           if (data[data.length - 1][1] === "assistant") {
-            await audioPlayer(data[data.length - 1][0], setAudioURL);
+
+            await audioPlayer(data[data.length - 1][0], setAudioURL, setAudioData);
+            const video = await getVideoFromAudio({audio: audioData, token: authToken});
+            console.log("video", video);
+            setVideoURL(video.data.video);
           }
         } catch {}
       }
@@ -75,11 +84,17 @@ function ChatHistory() {
             </div>
           ))
         ): null}
+        {
+          audioURL
+          &&
+          <audio src={audioURL} controls className="w-full"></audio>
+        }
+        <video className="m-auto w-1/2 py-4 rounded-lg" autoplay controls src={videoURL}></video>
+        
+        
         <div ref={messagesEndRef}></div>
-        <audio src={audioURL} controls className="w-full"></audio>
       </div>
     </div>
-
     </>
   )
 }

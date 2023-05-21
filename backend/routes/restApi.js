@@ -8,7 +8,22 @@ const createSystemMessage = require("../controllers/systemMessage/createSystemMe
 const getSystemMessage = require("../controllers/systemMessage/getSystemMessage");
 
 const createConversation = require("../controllers/conversation/createConversation");
-const getConversations = require("../controllers/conversation/getConversations")
+const getConversations = require("../controllers/conversation/getConversations");
+const audioToVideo = require("../controllers/audioToVideo/audioToVideo");
+
+router.post("/audioToVideo", async (req, res) => {
+  try {
+    if (req.body.audio) {
+      const video = await audioToVideo(req.body.audio);
+      res.send({video});
+    } else {
+      throw new Error("You must have an audio property included.");
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).send("error");
+  }
+})
 
 router.route("/conversations")
   .post(async (req, res) => {
