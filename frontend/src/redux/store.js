@@ -10,10 +10,14 @@ import { audioToVideoApi } from "./services/audioToVideoApi";
 
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 
+import { throttle } from "lodash";
+import settingsReducer from "./features/settings/settingsSlice";
+
 export const store = configureStore({
   reducer: {
     user: userReducer,
     conversation: conversationReducer,
+    settings: settingsReducer,
     [messagesApi.reducerPath]: messagesApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [conversationsApi.reducerPath]: conversationsApi.reducer,

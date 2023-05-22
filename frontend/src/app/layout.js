@@ -14,13 +14,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="shortcut icon" href="/public/logo-no-bg.png" />
+        <link rel="shortcut icon" href="/icons/favicon.ico"></link>
       </head>
       <body suppressHydrationWarning={true}>
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col h-screen w-full">
           <Providers>
-          <Header></Header>
-          {children}
+            <Header></Header>
+            {children}
           </Providers>
         </div>
       </body>

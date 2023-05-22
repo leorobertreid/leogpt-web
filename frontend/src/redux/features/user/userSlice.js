@@ -14,7 +14,7 @@ export const userSlice = createSlice({
     },
     setToken: (state, action) => {
       state.authToken = action.payload.authToken
-    }
+    },
   },
 })
 

@@ -21,17 +21,17 @@ function PostMessage() {
 
   return (
     <>
-    <form onSubmit={handleSubmit} className="fixed bottom-0 bg-white w-full p-2 flex justify-between items-center">
+    <form onSubmit={handleSubmit} className="fixed bottom-0 w-full mt-4 p-2 flex flex-col lg:flex-row justify-between items-center">
       <input 
         type="text" 
         placeholder="Type your message here" 
         onChange={(event) => setText(event.target.value)} 
         value={text} 
-        className="w-full rounded-lg py-2 px-3 bg-white text-black focus:outline-none focus:ring-2 focus:ring-zinc-800 shadow-lg" 
+        className="w-full rounded-lg lg:mr-5 mb-2 lg:mb-0 py-2 input input-bordered" 
       />
       <button 
         type="submit" 
-        className="transition hover:duration-300 bg-zinc-800 hover:bg-white hover:text-zinc-800 shadow-lg text-white font-bold py-2 px-3 rounded-lg ml-4 text-sm"
+        className="py-2 px-3 rounded-lg w-full lg:w-60 btn btn-primary"
       >
         submit
       </button>

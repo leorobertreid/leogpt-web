@@ -16,6 +16,9 @@ function ChatHistory() {
   const authToken = useSelector((state) => state.user.authToken);
   const conversation = useSelector((state) => state.conversation.conversation);
 
+  const loadAudio = useSelector((state) => state.settings.loadAudio);
+  const loadVideo = useSelector((state) => state.settings.loadVideo);
+
   const [getVideoFromAudio] = useGetVideoFromAudioMutation();
 
   // we use this to not do text to speech when you just loaded the page
@@ -44,11 +47,15 @@ function ChatHistory() {
       if (data) {
         try {
           if (data[data.length - 1][1] === "assistant") {
-
-            await audioPlayer(data[data.length - 1][0], setAudioURL, setAudioData);
-            const video = await getVideoFromAudio({audio: audioData, token: authToken});
-            console.log("video", video);
-            setVideoURL(video.data.video);
+            if (loadAudio) {
+              console.log("getting audio");
+              await audioPlayer(data[data.length - 1][0], setAudioURL, setAudioData);
+              if (loadVideo) {
+                console.log("getting video");
+                const video = await getVideoFromAudio({audio: audioData, token: authToken});
+                setVideoURL(video.data.video);
+              }
+            }
           }
         } catch {}
       }
@@ -58,15 +65,13 @@ function ChatHistory() {
   useEffect(() => {
     scrollToBottom()
 
-    console.log(justLoaded)
     handleAudio();
-
   }, [data]);
 
   return (
     <>
     <div>
-      <div className="py-10 w-1/2 m-auto">
+      <div className="py-10 w-1/2 m-auto text-lg">
         {error ? (
           <p>No messages found in this conversation. Once you start adding messages, they will appear here</p>
           ) : isLoading || isFetching ? (
@@ -75,11 +80,11 @@ function ChatHistory() {
           data.map((item) => (
             item[1] == "user"
             ?
-            <div key={uuid()} className="bg-white shadow-lg text-black p-2 rounded-md m-3">
+            <div key={uuid()} className="p-2 rounded-md m-3 min-h-20 bg-neutral">
               <p>{item[0]}</p>
             </div>
             :
-            <div key={uuid()} className="bg-zinc-800 shadow-lg text-white p-2 rounded-md m-3">
+            <div key={uuid()} className="p-2 rounded-md m-3 bg-black">
               <p>{item[0]}</p>
             </div>
           ))
@@ -87,10 +92,9 @@ function ChatHistory() {
         {
           audioURL
           &&
-          <audio src={audioURL} controls className="w-full"></audio>
+          <audio src={audioURL} controls className="w-full p-1"></audio>
         }
-        <video className="m-auto w-1/2 py-4 rounded-lg" autoplay controls src={videoURL}></video>
-        
+        <video className="m-auto w-1/2 py-4 rounded-lg" autoPlay controls src={videoURL}></video>
         
         <div ref={messagesEndRef}></div>
       </div>

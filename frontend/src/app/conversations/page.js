@@ -58,17 +58,17 @@ function Conversation() {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen flex-1">
-      <div className="px-8 py-6 mt-4 bg-white md:shadow-lg text-center w-120">
-        <div className="h-100 overflow-auto">
+    <div className="flex items-center justify-center flex-1">
+      <div className="px-8 py-6 text-center w-full lg:w-3/4">
+        <div>
           {error ? (
-            <p>Error finding conversations. Please try again later.</p>
+            <></>
             ) : isLoading || isFetching ? (
             <p>Loading...</p>
           ) : data ? (
             data.conversations.map((item) => (
               <div key={uuid()}>
-                <button onClick={() => handleConversationLink(item.name)} className="transition hover:duration-300 px-6 py-2 mt-4 text-white shadow-lg bg-zinc-800 rounded-lg hover:bg-white hover:text-zinc-800 w-full">
+                <button onClick={() => handleConversationLink(item.name)} className="px-6 py-3 mt-4 btn w-full">
                   {item.name}
                 </button>
               </div>
@@ -76,9 +76,9 @@ function Conversation() {
           ): null}
         </div>
         <div className="my-2">
-          <form onSubmit={handleCreateConversation} className="bg-white w-full mt-4 flex justify-between items-center">
-            <input type="text" onChange={handleInputChange} value={conversationName} className="w-full rounded-lg py-2 px-3 bg-white text-black focus:outline-none focus:ring-2 focus:ring-zinc-800 shadow-lg" placeholder="Conversation name"></input>
-            <button type="submit" className="w-60 transition hover:duration-300 bg-zinc-800 hover:bg-white hover:text-zinc-800 shadow-lg text-white font-bold py-2 px-3 rounded-lg ml-4 text-sm">Add conversation</button>
+          <form onSubmit={handleCreateConversation} className="w-full mt-4 flex flex-col lg:flex-row justify-between items-center">
+            <input type="text" onChange={handleInputChange} value={conversationName} className="w-full rounded-lg lg:mr-5 mb-2 lg:mb-0 py-2 input input-bordered" placeholder="Conversation name"></input>
+            <button type="submit" className="py-2 px-3 rounded-lg w-full lg:w-60 btn btn-primary">Add conversation</button>
           </form>
         </div>
       </div>

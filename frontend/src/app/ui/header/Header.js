@@ -2,61 +2,32 @@
 
 import Link from 'next/link'
 
-import Hamburger from "./Hamburger"
-import { useEffect, useState } from "react"
-
 const Header = () => {
-  const [showMenu, setShowMenu] = useState(false);
-
-  function toggleMenu() {
-    showMenu
-    ?
-    setShowMenu(false)
-    :
-    setShowMenu(true)
-  }
-
   return (
     <>
-      <nav className="bg-white text-zinc-800 shadow-lg sticky top-0 z-50">
-        <div className="mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex-shrink-0">
-              <Link href="/">
-                <div className="font-bold text-lg">
-                  Leo GPT
-                </div>
-              </Link>
-            </div>
-            {/* menu */}
-            <div className="flex">
-              <button type="button" className="text-gray-500 hover:text-white focus:outline-none focus:text-white" onClick={toggleMenu}>
-                <Hamburger></Hamburger>
-              </button>
-            </div>
+      <div className="navbar bg-base-100 shadow-lg">
+        <div className="flex-1">
+          <Link className="btn btn-ghost normal-case text-xl" href="/">Leo GPT</Link>
+        </div>
+        <div className="flex-none gap-2">
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img src="/icons/favicon.ico" />
+              </div>
+            </label>
+            <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+              <li><Link href="/" className="rounded-lg btn btn-ghost">Home</Link></li>
+              <li><Link href="conversations" className="rounded-lg btn btn-ghost">Conversations</Link></li>
+              <li><Link href="about" className="rounded-lg btn btn-ghost">About</Link></li>
+              <li><Link href="settings" className="rounded-lg btn btn-ghost">Settings</Link></li>
+              <li><Link href="login" className="rounded-lg btn btn-ghost">Log in</Link></li>
+              <li><Link href="signup" className="rounded-lg btn btn-ghost">Sign up</Link></li>
+            </ul>
           </div>
         </div>
-        {/* Navigation links */}
-        {
-          showMenu
-          &&
-          <div>
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <Link href="/" passHref>
-                <div className="transition hover:duration-300 hover:bg-zinc-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Home</div>
-              </Link>
-              <Link href="/login" passHref>
-                <div className="transition hover:duration-300 hover:bg-zinc-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Login</div>
-              </Link>
-              <Link href="/conversations" passHref>
-                <div className="transition hover:duration-300 hover:bg-zinc-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Conversations</div>
-              </Link>
-            </div>
-          </div>
-        }
-      </nav>
+      </div>
     </>
-
   )
 }
 
