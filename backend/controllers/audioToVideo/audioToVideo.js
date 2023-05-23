@@ -1,11 +1,11 @@
 const Replicate = require("replicate")
 require("dotenv").config();
 
+const fetch = require("cross-fetch");
+
 const fs = require("fs");
 
 async function audioToVideo(inputAudio) {
-  console.log("input audio", inputAudio);
-  console.log("api token", process.env.REPLICATE_API_TOKEN);
 
   const replicate = new Replicate({
     auth: process.env.REPLICATE_API_TOKEN,
@@ -20,7 +20,7 @@ async function audioToVideo(inputAudio) {
         source_image: inputImage,
         driven_audio: inputAudio,
       },
-      enhancer: ""
+      enhancer: "",
     }
   );
 
