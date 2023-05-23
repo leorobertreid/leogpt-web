@@ -19,7 +19,6 @@ const Header = () => {
             <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
               <li><Link href="/" className="rounded-lg btn btn-ghost">Home</Link></li>
               <li><Link href="conversations" className="rounded-lg btn btn-ghost">Conversations</Link></li>
-              <li><Link href="about" className="rounded-lg btn btn-ghost">About</Link></li>
               <li><Link href="settings" className="rounded-lg btn btn-ghost">Settings</Link></li>
               <li><Link href="login" className="rounded-lg btn btn-ghost">Log in</Link></li>
               <li><Link href="signup" className="rounded-lg btn btn-ghost">Sign up</Link></li>
