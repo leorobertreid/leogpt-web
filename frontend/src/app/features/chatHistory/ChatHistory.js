@@ -49,10 +49,12 @@ function ChatHistory() {
           if (data[data.length - 1][1] === "assistant") {
             if (loadAudio) {
               console.log("getting audio");
-              await audioPlayer(data[data.length - 1][0], setAudioURL, setAudioData);
+              const audioDataReturned = await audioPlayer(data[data.length - 1][0], setAudioURL, setAudioData);
+              console.log(audioDataReturned);
               if (loadVideo) {
                 console.log("getting video");
-                const video = await getVideoFromAudio({audio: audioData, token: authToken});
+                const video = await getVideoFromAudio({audio: audioDataReturned, token: authToken});
+                console.log(video);
                 setVideoURL(video.data.video);
               }
             }

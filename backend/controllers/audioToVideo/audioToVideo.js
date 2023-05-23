@@ -1,8 +1,6 @@
 const Replicate = require("replicate")
 require("dotenv").config();
 
-const fetch = require("cross-fetch");
-
 const fs = require("fs");
 
 async function audioToVideo(inputAudio) {

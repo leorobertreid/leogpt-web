@@ -59,7 +59,7 @@ export default function SignUp() {
   
       dispatch(setUser({username: input.Username, authToken}))
   
-      push('/');
+      push('/login');
     } catch(e) {
       console.log("User already exists with that name");
       setInvalidSignIn(true);
