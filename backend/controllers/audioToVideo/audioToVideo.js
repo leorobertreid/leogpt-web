@@ -4,6 +4,9 @@ require("dotenv").config();
 const fs = require("fs");
 
 async function audioToVideo(inputAudio) {
+  console.log("input audio", inputAudio);
+  console.log("api token", process.env.REPLICATE_API_TOKEN);
+
   const replicate = new Replicate({
     auth: process.env.REPLICATE_API_TOKEN,
   });
